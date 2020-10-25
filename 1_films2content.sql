@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS films, persons, persons2content;
+
 create table persons (
   id serial not null primary key,
   fio varchar (128) not null
