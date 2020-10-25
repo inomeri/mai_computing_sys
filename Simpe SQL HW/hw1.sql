@@ -54,6 +54,6 @@ WITH active_users_tmp as (
     GROUP BY userid 
     HAVING count(1)>10
 )
-SELECT (rating) 
+SELECT avg(rating) 
     FROM ratings 
 WHERE userid in (SELECT * FROM active_users_tmp);
