@@ -38,14 +38,14 @@ LIMIT 10;
 
 -- 4. Иерархические запросы
 -- 4.1 Достать любые 10 imbdId из links у которых средний рейтинг больше 3.5
-SELECT DISTINCT imdbid
-    FROM movie.links  
-WHERE
-    3.5 < (
-            SELECT AVG(rating)
-            FROM movie.ratings
-          )
-LIMIT 10;
+SELECT DISTINCT imdbid, movieid
+    FROM movie.links
+    WHERE links.movieid IN (
+        SELECT movieid 
+        FROM movie.ratings
+            GROUP BY movieid
+            HAVING AVG(rating)>3.5
+        LIMIT 10);
 
 -- 4.2 Посчитать средний рейтинг по пользователям, у которых более 10 оценок
 WITH active_users_tmp as (
