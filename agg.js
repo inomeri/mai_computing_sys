@@ -7,7 +7,7 @@ print('Tags count: ', db.tags.find().count());
 /*
         2. Добавляем фильтрацию: считаем только количество фильмов с тегом Adventure
 */
-print('"Adventure" tags count: ', db.tags.find({tag_name : "Adventure"}).count());
+print('"Adventure" tags count: ', db.tags.find({"tag_name" : "Adventure"}).count());
 /*
         3. Очень сложный запрос: используем группировку данных посчитать количество вхождений для каждого тега
         и напечатать top-3 самых популярных
@@ -15,7 +15,7 @@ print('"Adventure" tags count: ', db.tags.find({tag_name : "Adventure"}).count()
 printjson(
         db.tags.aggregate([
                 { $group: {
-                                _id: $tag_name,
+                                _id: "$tag_name",
                                 tag_count: { $sum: 1 }
                            }
                 },
