@@ -20,6 +20,6 @@ printjson(
                            }
                 },
                 { $sort: { tag_count : -1 }},
-                { limit 3}
+                { $limit: 3}
         ])['_batch']
 );
